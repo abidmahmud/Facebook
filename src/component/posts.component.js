@@ -36,14 +36,20 @@ class Posts extends React.Component {
     }
 
     handleRemove = (id) => {
-        const del = [...this.state.posts];
-        const del2 = del.filter(post => post.id !== id);
+        const posts = [...this.state.posts];
+        const post = posts.find(post => post.id === id);
 
-        let count = del2.like === 1 ?
-            this.setState({ like: this.state.like - 1 }) :
-            this.setState({ dislike: this.state.dislike - 1 });
+        if (post.like === true)
+            this.setState({ CountLike: this.state.CountLike - 1 });
+        if (post.dislike === true)
+            this.setState({
+                CountDislike: this.state.CountDislike - 1,
+            });
 
-        this.setState({ posts: del2 });
+        const updatedPosts = posts.filter((post) => {
+            return post.id === id ? false : true;
+        }, id);
+        this.setState({ posts: updatedPosts });
     }
 
     handleAdd = () => {
@@ -79,6 +85,8 @@ class Posts extends React.Component {
 
         this.setState({ posts });
     };
+
+
 
     handleToggleDislike = (id) => {
         const posts = [...this.state.posts];
