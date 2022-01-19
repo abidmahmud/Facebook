@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './navbar.component';
 import Post from './post.component';
+import Form from './form.component';
 
 class Posts extends React.Component {
     state = {
@@ -32,7 +33,8 @@ class Posts extends React.Component {
                 content: "If you’re happy to put a little ‘sand’ into your ‘sandwich’ Weston Beach is a lovely spot with views of Wales across the water. Whilst spending the day out you can unfold your picnic blanket and sit in the sun."
             },
         ],
-        length: 3
+        length: 3,
+        showForm: false,
     }
 
     handleRemove = (id) => {
@@ -52,18 +54,29 @@ class Posts extends React.Component {
         this.setState({ posts: updatedPosts });
     }
 
-    handleAdd = () => {
+    handleSave = (posts) => {
         const posts = [...this.state.posts];
-        posts.push({
-            id: this.state.length + 1,
-            like: false,
-            dislike: false,
-            name: `Post ${this.state.length + 1}`,
-            date: "14-01-2022",
-            content: "Content here"
-        });
-        console.log(posts);
-        this.setState({ posts, length: this.state.length + 1 });
+    }
+
+    handleAdd = () => {
+
+        console.log("new ?");
+
+        const showForm = !this.state.showForm;
+        this.setState({ showForm })
+
+
+        // const posts = [...this.state.posts];
+        // posts.push({
+        //     id: this.state.length + 1,
+        //     like: false,
+        //     dislike: false,
+        //     name: `Post ${this.state.length + 1}`,
+        //     date: "14-01-2022",
+        //     content: "Content here"
+        // });
+        // console.log(posts);
+        // this.setState({ posts, length: this.state.length + 1 });
     }
 
     handleToggleLike = (id) => {
@@ -121,6 +134,11 @@ class Posts extends React.Component {
                     onClick={this.handleAdd}>
                     Add New Post
                 </button>
+
+                {this.state.showForm === true ? (
+                    <Form handleSave={this.handleSave} />
+                ) : null}
+
 
                 {
                     this.state.posts.map(post => {
