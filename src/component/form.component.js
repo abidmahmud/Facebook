@@ -17,37 +17,40 @@ function Form(props) {
 
     return (
         <>
-
-            <div className='card-body'>
-                <input
-                    type="text"
-                    placeholder="Title"
-                    name='name'
-                    className="form-control"
-                    value={post.name}
-                    onChange={(event) => handleChange(event)}
-                />
-                <form onSubmit={handleSubmit}>
+            <div className='card' style={{ marginLeft: '1rem', marginBottom: '1rem', width: '25rem' }}>
+                <div className='card-body'>
                     <input
                         type="text"
+                        placeholder="Title"
+                        name='name'
                         className="form-control"
-                        name='content'
-                        placeholder="Content"
-                        value={post.content}
+                        value={post.name || ""}
                         onChange={(event) => handleChange(event)}
                     />
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name='content'
+                            placeholder="Content"
+                            value={post.content || ""}
+                            onChange={(event) => handleChange(event)}
+                        />
 
-                    <input
-                        type="date"
-                        placeholder="Content"
-                        name='date'
-                        className="form-control"
-                        value={post.date}
-                        onChange={(event) => handleChange(event)}
-                    />
-                    <input type="submit" />
-                </form>
-            </div>
+                        <input
+                            type="date"
+                            placeholder="Content"
+                            name='date'
+                            className="form-control"
+                            value={post.date || ""}
+                            onChange={(event) => handleChange(event)}
+                        />
+                        <input style={{ padding: "10px" }} className='btn btn-primary' type="submit" />
+                    </form>
+                </div>
+
+            </div >
+
 
         </>
     );
@@ -58,7 +61,7 @@ function Form(props) {
 //     const fieldName = event.target.name;
 //     const fieldValue = event.target.value;
 
-//     setInputs((values) => ({ ...values, [fieldName]: fieldValue }))
+//     setInputs((values) => ({...values, [fieldName]: fieldValue }))
 // };
 
 
