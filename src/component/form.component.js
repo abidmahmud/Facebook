@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Form = (props) => {
+function Form(props) {
     const [post, setPost] = useState({});
 
     const handleChange = (event) => {
@@ -17,22 +17,38 @@ const Form = (props) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+
+            <div className='card-body'>
                 <input
                     type="text"
                     placeholder="Title"
-                    value={post.name || ""}
+                    name='name'
+                    className="form-control"
+                    value={post.name}
                     onChange={(event) => handleChange(event)}
                 />
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name='content'
+                        placeholder="Content"
+                        value={post.content}
+                        onChange={(event) => handleChange(event)}
+                    />
 
-                <input
-                    type="date"
-                    placeholder="Content"
-                    value={post.date}
-                    onChange={(event) => handleChange(event)}
-                />
-                <input type="submit" />
-            </form>
+                    <input
+                        type="date"
+                        placeholder="Content"
+                        name='date'
+                        className="form-control"
+                        value={post.date}
+                        onChange={(event) => handleChange(event)}
+                    />
+                    <input type="submit" />
+                </form>
+            </div>
+
         </>
     );
 

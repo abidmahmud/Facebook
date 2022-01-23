@@ -59,10 +59,10 @@ class Posts extends React.Component {
 
         const posts = [...this.state.posts];
         posts.push({
-            id: posts.length > 0 ? posts[posts.length - 1].post_id + 1 : 1,
-            like: newPost.like,
+            id: posts.length > 0 ? posts[posts.length - 1].id + 1 : 1,
+            like: posts.like,
             dislike: newPost.dislike,
-            name: `Post ${this.state.length + 1}`,
+            name: newPost.name,
             date: newPost.date,
             content: newPost.content,
         });
