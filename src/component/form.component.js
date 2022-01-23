@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 
-const Form = ({ handleSave }) => {
-    const [inputs, setInputs] = useState({});
-    const [content, setContent] = useState("");
-    const [title, setTitle] = useState("");
+const Form = (props) => {
+    const [post, setPost] = useState({});
+
+    const handleChange = (event) => {
+        const fieldName = event.target.name;
+        const fieldValue = event.target.value;
+
+        setPost((values) => ({ ...values, [fieldName]: fieldValue }));
+    }
 
     const handleSubmit = (event) => {
+        props.handleAdd(post);
         event.preventDefault();
-        console.log(inputs);
-        const obj = {
-            title: title,
-            content: content,
-        };
-        handleSave(obj);
-        console.log(obj);
     };
 
     return (
@@ -22,20 +21,15 @@ const Form = ({ handleSave }) => {
                 <input
                     type="text"
                     placeholder="Title"
-                    value={title}
-                    onChange={(event) => {
-                        setTitle(event.target.value);
-                        console.log(event);
-                    }}
+                    value={post.name || ""}
+                    onChange={(event) => handleChange(event)}
                 />
 
                 <input
-                    type="text"
+                    type="date"
                     placeholder="Content"
-                    value={content}
-                    onChange={(event) => {
-                        setContent(event.target.value);
-                    }}
+                    value={post.date}
+                    onChange={(event) => handleChange(event)}
                 />
                 <input type="submit" />
             </form>

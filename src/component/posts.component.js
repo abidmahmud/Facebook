@@ -7,13 +7,15 @@ class Posts extends React.Component {
     state = {
         CountLike: 0,
         CountDislike: 0,
+        length: 3,
+        showForm: false,
         posts: [
             {
                 id: 1,
                 like: false,
                 dislike: false,
                 name: "Bangladesh Win Over NZ in Mount Maunganui.",
-                date: "12-01-2020",
+                date: "12-01-201",
                 content: "A seminal moment in Bangladesh cricket history and this is also their first WTC win in this current cycle. "
             },
             {
@@ -21,7 +23,7 @@ class Posts extends React.Component {
                 like: false,
                 dislike: false,
                 name: "Omicron Wave.",
-                date: "12-01-2020",
+                date: "05-10-2020",
                 content: "Bangladesh has reported a sharp rise in COVID-19 infections and virus-related deaths over the past week amid fears of omicron variant spreading throughout the country."
             },
             {
@@ -29,12 +31,10 @@ class Posts extends React.Component {
                 like: false,
                 dislike: false,
                 name: "Annual Picnic of BS-23.",
-                date: "12-01-2020",
+                date: "17-01-2022",
                 content: "If you’re happy to put a little ‘sand’ into your ‘sandwich’ Weston Beach is a lovely spot with views of Wales across the water. Whilst spending the day out you can unfold your picnic blanket and sit in the sun."
             },
         ],
-        length: 3,
-        showForm: false,
     }
 
     handleRemove = (id) => {
@@ -54,29 +54,25 @@ class Posts extends React.Component {
         this.setState({ posts: updatedPosts });
     }
 
-    handleSave = (posts) => {
+    handleAdd = (newPost) => {
+        this.showForm();
+
         const posts = [...this.state.posts];
+        posts.push({
+            id: posts.length > 0 ? posts[posts.length - 1].post_id + 1 : 1,
+            like: newPost.like,
+            dislike: newPost.dislike,
+            name: `Post ${this.state.length + 1}`,
+            date: newPost.date,
+            content: newPost.content,
+        });
+        console.log(posts);
+        this.setState({ posts });
     }
 
-    handleAdd = () => {
-
-        console.log("new ?");
-
+    showForm = () => {
         const showForm = !this.state.showForm;
         this.setState({ showForm })
-
-
-        // const posts = [...this.state.posts];
-        // posts.push({
-        //     id: this.state.length + 1,
-        //     like: false,
-        //     dislike: false,
-        //     name: `Post ${this.state.length + 1}`,
-        //     date: "14-01-2022",
-        //     content: "Content here"
-        // });
-        // console.log(posts);
-        // this.setState({ posts, length: this.state.length + 1 });
     }
 
     handleToggleLike = (id) => {
@@ -98,8 +94,6 @@ class Posts extends React.Component {
 
         this.setState({ posts });
     };
-
-
 
     handleToggleDislike = (id) => {
         const posts = [...this.state.posts];
@@ -131,14 +125,13 @@ class Posts extends React.Component {
                 <button
                     style={{ marginLeft: '1rem' }}
                     className='btn btn-primary m-3 '
-                    onClick={this.handleAdd}>
+                    onClick={this.showForm}>
                     Add New Post
                 </button>
 
                 {this.state.showForm === true ? (
-                    <Form handleSave={this.handleSave} />
+                    <Form handleAdd={this.handleAdd} />
                 ) : null}
-
 
                 {
                     this.state.posts.map(post => {
