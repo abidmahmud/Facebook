@@ -45,7 +45,7 @@ function Form(props) {
                             value={post.date || ""}
                             onChange={(event) => handleChange(event)}
                         />
-                        <input style={{ padding: "10px" }} className='btn btn-primary' type="submit" />
+                        <input className='btn btn-primary' type="submit" />
                     </form>
                 </div>
 

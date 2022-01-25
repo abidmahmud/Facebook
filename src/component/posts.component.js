@@ -72,7 +72,7 @@ class Posts extends React.Component {
 
     showForm = () => {
         const showForm = !this.state.showForm;
-        this.setState({ showForm })
+        this.setState({ showForm });
     }
 
     handleToggleLike = (id) => {
